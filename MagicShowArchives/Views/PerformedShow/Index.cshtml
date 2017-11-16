@@ -1,0 +1,83 @@
+﻿@model MagicShowArchives.Models.Performed_Show
+@{
+    ViewBag.Title = "Performed Shows";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Performed Shows</h2>
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#performedShowModal">
+    Add Performed Show
+</button>
+
+<table class="table" id="PerformedShowTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Show Name</th>
+            <th>Client Name</th>
+            <th>Date Performed</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!--Insert or Update Modal-->
+<div class="modal fade" id="performedShowModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><label id="title"></label></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Id" />
+                    </div>
+                    <div class="form-group">
+                        <label>Show Name</label>
+                        @Html.DropDownListFor(x => x.ShowId, ViewBag.ShowId as SelectList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Client Name</label>
+                        @Html.DropDownListFor(x => x.ClientId, ViewBag.ClientId as SelectList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Date Performed</label>
+                        <input type="text" class="form-control" id="Date" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
+                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Confirmation modal-->
+<div id="confirmModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><label id="title"></label></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    Do you want to delete this record ?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                <button type="button" id="btnCancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/scripts/lib/performedshow.js"></script>
+}
